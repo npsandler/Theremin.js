@@ -22,7 +22,7 @@ In addition, this project will include:
 This app will consist of a single screen with an input area, waveform controls, and filter sliders. It will also include a link to my Github, LinkedIn, and the About modal. Game controls will include Start, Stop, and Reset buttons as well as a slider to control the speed. On top, it will have a toggle with optionfs for the waveform shapes. On the bottom, there will be two (or more) sliders to add/subtract the different filter effects.
 
 
-![wireframe](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+![wireframe](https://github.com/npsandler/Theramin.js/blob/master/Theramin.png)
 
 
 
