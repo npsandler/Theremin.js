@@ -12,14 +12,15 @@ With this app, users will be able to:
  Toggle between different opptions of waveform shapes
  Draggable sliders to effect different filters and how much they impact the sound
 
-In addition, this project will include:
+ In addition, this project will include:
 
- An About modal describing the background and rules of the game
- A production README
+ -An About modal describing the background and instructions for using the app
+
+ -A production README
 
 ### Wireframe
 
-This app will consist of a single screen with an input area, waveform controls, and filter sliders. It will also include a link to my Github, LinkedIn, and the About modal. Game controls will include Start, Stop, and Reset buttons as well as a slider to control the speed. On top, it will have a toggle with optionfs for the waveform shapes. On the bottom, there will be two (or more) sliders to add/subtract the different filter effects.
+This app will consist of a single screen with an input area, waveform controls, and filter sliders. It will also include a link to my Github, LinkedIn, and the About modal. On top, the game will have a toggle with option for the waveform shapes. On the bottom, there will be two (or more) sliders to add/subtract the different filter effects.
 
 
 ![wireframe](https://github.com/npsandler/Theramin.js/blob/master/Theramin.png)
@@ -30,7 +31,8 @@ This app will consist of a single screen with an input area, waveform controls, 
 
 This project will be implemented with the following technologies:
 
-JavaScript for game logic,
+JavaScript for app logic,
+
 Web Audio API for the audio
 
 
