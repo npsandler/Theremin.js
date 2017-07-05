@@ -1,15 +1,16 @@
 
 
 document.addEventListener("DOMContentLoaded", function(event) {
-  var canvas = document.getElementById('canvas');
-  var output = document.getElementById('output');
+
+
+  let canvas = document.getElementById('canvas');
+  let output = document.getElementById('output');
 
 
 
-
-  var synth = new (window.AudioContext)();
-  var osc = synth.createOscillator();
-  var gain = synth.createGain();
+  let synth = new (window.AudioContext)();
+  let osc = synth.createOscillator();
+  let gain = synth.createGain();
 
   osc.type = 'sine';
   osc.connect(gain);
@@ -17,9 +18,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
   gain.connect(synth.destination);
   osc.start();
 
-  var active = false;
-  var volume = 0;
-  var freq = 0;
+  let active = false;
+  let volume = 0;
+  let freq = 0;
 
 
   canvas.addEventListener('mousedown', (e) => {
@@ -34,8 +35,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     release(e);
   });
 
-  var width = canvas.offsetWidth;
-  var height = canvas.offsetHeight
+  let width = canvas.offsetWidth;
+  let height = canvas.offsetHeight;
   function capture(e){
     e.preventDefault();
     active = true;
@@ -43,35 +44,30 @@ document.addEventListener("DOMContentLoaded", function(event) {
     freq = ~~(1000*(1-((e.clientY||e.touches[0].clientY)/height)));
     osc.frequency.value = freq;
     gain.gain.value = volume;
-    // output.innerHTML = 'Frequency = '+freq+'hz, Volume = '+~~(volume*100)+'%';
   }
 
   function drag(e){
     e.preventDefault();
     if (active) {
-      volume = ~~((e.clientX||e.touches[0].clientX)/width*100)/100;
-      freq = ~~(1000*(1-((e.clientY||e.touches[0].clientY)/height)));
+      volume = ~~((e.clientY)/width*100)/100;
+      freq = ~~(1000*(1-((e.clientX)/height))+ 5);
       osc.frequency.value = freq;
       gain.gain.value = volume;
-      // output.innerHTML = 'Frequency = '+freq+'hz, Volume = '+~~(volume*100)+'%';
     }
   }
 
   function release(e){
     active = false;
     gain.gain.value = 0;
-    // output.innerHTML = '';
   }
 
-  var waveShapes = document.getElementsByTagName('input');
-  const buttons = Array.from(waveShapes);
-  buttons.forEach( waveShape => {
-    debugger
-      waveShape.addEventListener('click',() => {
-        debugger
-        changeWaveShape(this.data);
-      });
+  let waveShapes = document.getElementsByClassName('shape');
+
+  for (i=0;i<waveShapes.length;i++){
+    waveShapes[i].addEventListener('click',function(){
+      changeWaveShape(this.id);
     });
+  }
 
   function changeWaveShape(type){
     osc.type = type;

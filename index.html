@@ -4,6 +4,7 @@
         <meta charset="utf-8" />
         <title>theremin.js</title>
          <link rel="stylesheet" href="styles.css">
+         <link rel="stylesheet" href="slider_styles.css">
     </head>
     <body border="10px solid red">
         <h1>Theremin.js</h1>
@@ -11,15 +12,17 @@
         <canvas id="canvas" height="650" width="1700"></canvas>
         <section class=bottom>
           <section class=waves>
-            <input value=&#8767; data=sine type=button>
-            <input value=&#9653; data=triangle type=button>
-            <input value=&#9633; data=square type=button>
-            <input value=&#9649; data=sawtooth type=button>
+            <input value=&#8767; class="shape" id="sine" type=button>
+            <input value=&#9653; class="shape" id="triangle" type=button>
+            <input value=&#9633; class="shape" id="square" type=button>
+            <input value=&#9649; class="shape" id="sawtooth" type=button>
           </section>
           <section class="sliders">
-
+            <input type="range" class="slider" id="delay"/>
+            <input type="range" class="slider" id="feedback"/>
+            <input type="range" class="slider" id="scuzz"/>
           </section>
-
+        </section>
         <div id=output></div>
     </body>
 </html>

@@ -48,13 +48,21 @@ color: #88dade;
 }
 
 .waves > input:hover {
-    color: #fff952; 
+    color: #fff952;
+    cursor: pointer;
 }
 
 .sliders {
   border-right: 10px solid black;
-  width: 1370px;
+  width: 1170px;
+  display: flex;
+  flex-direction: column;
 }
+
+.sliders > input {
+  margin: 6px 0 6px -6px;
+}
+
 
 #canvas {
   border: 10px solid black;
