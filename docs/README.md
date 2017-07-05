@@ -23,7 +23,7 @@ With this app, users will be able to:
 This app will consist of a single screen with an input area, waveform controls, and filter sliders. It will also include a link to my Github, LinkedIn, and the About modal. On top, the game will have a toggle with option for the waveform shapes. On the bottom, there will be two (or more) sliders to add/subtract the different filter effects.
 
 
-![wireframe](https://github.com/npsandler/Theramin.js/blob/master/Theramin.png)
+![wireframe](https://github.com/npsandler/Theramin.js/blob/master/docs/Theramin.png)
 
 
 
