@@ -23,11 +23,41 @@ background: #ff5c5c;
 color: #88dade;
 }
 
+.bottom {
+  width: 1720px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  border-bottom: 10px solid black;
+  margin-top: -50px;
+}
+
+.waves {
+  height: 190px;
+  width: 320px;
+  display: flex;
+  flex-wrap: wrap;
+  border-right: 10px solid black;
+  border-left: 10px solid black;
+}
+
+.waves > input {
+  font-size: 105px;
+  vertical-align: top;
+  text-align: center;
+}
+
+.waves > input:hover {
+    color: #fff952; 
+}
+
+.sliders {
+  border-right: 10px solid black;
+  width: 1370px;
+}
+
 #canvas {
   border: 10px solid black;
   margin: 50px auto;
   display: block;
 }
-
-// yellow
-// color: #fff952;

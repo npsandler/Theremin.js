@@ -1,14 +1,13 @@
 
 
 document.addEventListener("DOMContentLoaded", function(event) {
-  debugger
   var canvas = document.getElementById('canvas');
   var output = document.getElementById('output');
 
 
 
 
-  var synth = new (window.AudioContext || window.webkitAudioContext )();
+  var synth = new (window.AudioContext)();
   var osc = synth.createOscillator();
   var gain = synth.createGain();
 
@@ -23,10 +22,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
   var freq = 0;
 
 
-  debugger
-  canvas.addEventListener('mousedown', function(e){capture(e)});
-  canvas.addEventListener('mousemove',function(e){drag(e)});
-  canvas.addEventListener('mouseup',function(e){release(e)});
+  canvas.addEventListener('mousedown', (e) => {
+    capture(e);
+  });
+
+  canvas.addEventListener('mousemove',(e) => {
+    drag(e);
+  });
+
+  canvas.addEventListener('mouseup', (e) => {
+    release(e);
+  });
 
   var width = canvas.offsetWidth;
   var height = canvas.offsetHeight
@@ -58,15 +64,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
   }
 
   var waveShapes = document.getElementsByTagName('input');
-  waveShapes.forEach(waveShape => (
+  const buttons = Array.from(waveShapes);
+  buttons.forEach( waveShape => {
+    debugger
       waveShape.addEventListener('click',() => {
-        changeWaveShape(this.value);
+        debugger
+        changeWaveShape(this.data);
       });
-      waveShape.addEventListener('touchstart', () => {
-        changeWaveShape(this.value);
-      });
-    );
-  );
+    });
 
   function changeWaveShape(type){
     osc.type = type;
