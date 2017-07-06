@@ -45,8 +45,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
   function capture(e){
     e.preventDefault();
     active = true;
-    volume = ((e.clientX||e.touches[0].clientX)/height*100)/100;
-    freq = (1000*(((e.clientY||e.touches[0].clientY)/width)));
+    volume = 1.1 - (((e.clientY)/height*100)/100);
+    freq = 500-1000*(1-((e.clientX)/width))+ 5;
     osc.frequency.value = freq;
     gain.gain.value = volume;
   }
@@ -54,10 +54,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
   function drag(e){
     e.preventDefault();
     if (active) {
-      volume = ((e.clientY)/height*100)/100;
-      freq = (1000*(1-((e.clientX)/width))+ 5);
-      console.log(e.clientX)
-      // console.log(e.clientY)
+      volume = 1.1 - (((e.clientY)/height*100)/100);
+      freq = 500-1000*(1-((e.clientX)/width))+ 5;
       osc.frequency.value = freq;
       gain.gain.value = volume;
     }
@@ -66,37 +64,51 @@ document.addEventListener("DOMContentLoaded", function(event) {
   function release(e){
     active = false;
     gain.gain.value = 0;
-
+    canvasCtx.clearRect(0, 0, 1200, 650);
   }
 
+
+  //sound wave buttons
   let waveShapes = document.getElementsByClassName('oscType');
 
-  for (i=0;i<waveShapes.length;i++){
+  for (i=0; i < waveShapes.length; i++){
     waveShapes[i].addEventListener('click',function(){
-      changeWaveShape(this.id);
+      osc.type = this.id;
     });
   }
 
-  function changeWaveShape(type){
-    osc.type = type;
+
+  // effect sliders
+  let sliders = document.getElementsByClassName('slider');
+  debugger
+  for (i=0; i < sliders.length; i++){
+    sliders[i].addEventListener('change',function(){
+      debugger
+      console.log(this)
+    });
+  }
+  //update slider vals
+  function updateVal(val) {
+    document.getElementById('textInput').value=val;
+    debugger
+    console.log(this);
   }
 
 
 
-// visualization
+  // visualization
   analyser.fftSize = 8192;
   analyser.smoothingTimeConstant = 0;
 
   let bufferLength = analyser.frequencyBinCount;
   let dataArray = new Uint8Array(bufferLength);
   analyser.getByteTimeDomainData(dataArray);
-
   let processer = theremin.createScriptProcessor(2048, 1, 1);
   processer.connect(theremin.destination)
 
- let sourceNode = theremin.createBufferSource();
- sourceNode.connect(analyser);
- analyser.connect(processer);
+  let sourceNode = theremin.createBufferSource();
+  sourceNode.connect(analyser);
+  analyser.connect(processer);
 
 
   processer.onaudioprocess = function() {
@@ -107,7 +119,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
       gradient.addColorStop(0.1,'#f42424');
 
     let freqArray =  new Uint8Array(analyser.frequencyBinCount);
+
     analyser.getByteFrequencyData(freqArray);
+
 
     canvasCtx.clearRect(0, 0, 1200, 650);
     canvasCtx.fillStyle=gradient;
@@ -115,12 +129,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   };
 
-   function drawSpectrum(array) {
-   for ( let i = 0; i < (array.length); i++ ){
-           let barHeight = array[i] * 2.5;
-           canvasCtx.fillRect(i*5, (650-barHeight), 4, barHeight);
+  function drawSpectrum(array) {
+    for ( let i = 0; i < (array.length); i++ ){
+     let barHeight = array[i] * 2.6;
+     canvasCtx.fillRect(i*8, (650-barHeight), 6, barHeight);
    }
- }
+  }
 
 
 });

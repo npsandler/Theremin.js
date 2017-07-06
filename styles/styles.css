@@ -24,7 +24,6 @@ background: #eceff1;
 color: #88dade;
 display: flex;
 flex-flow: column;
-/*justify-content: center;*/
 }
 
 
@@ -33,6 +32,25 @@ text {
   margin-top: -5px;
 }
 
+.banner {
+  width: 1200px;
+  display: flex;
+  justify-content:center;
+  margin: 50px auto 0 auto;
+  border-top: 10px solid black;
+  border-left: 10px solid black;
+  border-right: 10px solid black;
+}
+
+.banner > * {
+  font-size: 36px;
+  padding: 2% 5%;
+}
+
+#logo {
+  width: 20%;
+  height: 5%;
+}
 
 .bottom {
   width: 1220px;
@@ -40,7 +58,6 @@ text {
   justify-content: space-between;
   margin: 0 auto;
   border-bottom: 10px solid black;
-  margin-top: -50px;
   background: #ff5c5c;
 }
 
@@ -73,13 +90,20 @@ text {
 }
 
 .sliders > div {
-  margin: 3px 0 3px 6px;
+  margin: 1.2% 0 1px 6px;
+  display: inline-flex;
+  justify-content: flex-end;
+}
+
+.sliders > div > * {
+  margin-right: 10px;
+
 }
 
 
 #canvas {
   border: 10px solid black;
-  margin: 50px auto;
+  margin: 0 auto;
   display: block;
   background: #ff5c5c;
 }
@@ -93,25 +117,17 @@ text {
   color: #88dade;
 }
 
-.instructions {
+#instructions {
   position: absolute;
-  margin-top: 100px;
-  margin-left: 353px;
-  width: 1200px;
-  height: 910px;
-  /*display: block;*/
-  /*margin: 0 auto;*/
-  display: none;
+  display: block;
+  /*margin-top: 6.8%;
+  margin-left: 18.5%;*/
+  width: 100%;
+  height: auto;
 }
 
-.x {
-  position: absolute;
-  font-size: 36px;
-  font-weight: bold;
-  color: black;
-  margin-left: 1415px;
-  margin-top: 150px;
-
+#open:hover {
+  cursor: help;
 }
 
 

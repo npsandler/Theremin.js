@@ -8,16 +8,22 @@
          <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
     </head>
     <body>
-        <img class="instructions" src="./docs/instructions.png" alt="Instructions">
-        <button type="button" name="button" class="x">X</button> </img>
-        <h1>Theremin.js</h1>
-        <section class="links">
-          <a href="https://www.linkedin.com/in/npsandler/"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-          <a href="https://github.com/npsandler"><i class="fa fa-github" ></i></a>
-          <a href="https://angel.co/nathaniel-sandler"><i class="fa fa-angellist" aria-hidden="true"></i></a>
-        </section>
         <script src="theremin.js"></script>
+        <script src="instructions.js"></script>
+        <img id="instructions" src="./docs/instructions.png" alt="Instructions">
+
+        <section class="banner">
+          <img id="logo" src="./docs/logo.png" alt="Theremin.js">
+          <section class="links">
+            <a href="https://www.linkedin.com/in/npsandler/"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a href="https://github.com/npsandler"><i class="fa fa-github" ></i></a>
+            <a href="https://angel.co/nathaniel-sandler"><i class="fa fa-angellist" aria-hidden="true"></i></a>
+          </section>
+          <button id="open">Instructions</button>
+        </section>
+
         <canvas id="canvas" height="650" width="1200"></canvas>
+
         <section class=bottom>
           <section class=waves>
             <input value=&#8767; class="oscType" id="sine" type=button>
@@ -27,13 +33,19 @@
           </section>
           <section class="sliders">
             <div>
-              <input type="range" class="slider" id="delay"/> <text>Delay</text>
+              <text>Delay</text>
+              <output name="delayOutput" id="delayOutput">40</output>
+              <input type="range" name="delayInput" id="delayInput" value="40" class="slider" oninput="delayOutput.value = delayInput.value">
             </div>
             <div>
-              <input type="range" class="slider" id="feedback"/> <text>Feedback</text>
+              <text>Feedback</text>
+              <output name="feedbackOutput" id="feedbackOutput">50</output>
+              <input type="range" name="feedbackInput" id="feedbackInput" value="50" class="slider" oninput="feedbackOutput.value = feedbackInput.value">
             </div>
             <div>
-              <input type="range" class="slider" id="scuzz"/> <text>Scuzz</text>
+              <text>Distortion</text>
+              <output name="distortionOutput" id="distortionOutput">60</output>
+              <input type="range" name="distortionInput" id="distortionInput" value="60" class="slider" oninput="distortionOutput.value = distortionInput.value">
             </div>
           </section>
         </section>
