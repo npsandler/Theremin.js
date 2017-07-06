@@ -45,8 +45,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
   function capture(e){
     e.preventDefault();
     active = true;
-    volume = ~~((e.clientX||e.touches[0].clientX)/width*100)/100;
-    freq = ~~(1000*(1-((e.clientY||e.touches[0].clientY)/height)));
+    volume = ((e.clientX||e.touches[0].clientX)/height*100)/100;
+    freq = (1000*(((e.clientY||e.touches[0].clientY)/width)));
     osc.frequency.value = freq;
     gain.gain.value = volume;
   }
@@ -54,8 +54,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
   function drag(e){
     e.preventDefault();
     if (active) {
-      volume = ~~((e.clientY)/width*100)/100;
-      freq = ~~(1000*(1-((e.clientX)/height))+ 5);
+      volume = ((e.clientY)/height*100)/100;
+      freq = (1000*(1-((e.clientX)/width))+ 5);
+      console.log(e.clientX)
+      // console.log(e.clientY)
       osc.frequency.value = freq;
       gain.gain.value = volume;
     }
@@ -64,8 +66,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   function release(e){
     active = false;
     gain.gain.value = 0;
-    canvasCtx.clearRect(0, 0, 1200, 600);
-    debugger
+
   }
 
   let waveShapes = document.getElementsByClassName('oscType');
@@ -108,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     let freqArray =  new Uint8Array(analyser.frequencyBinCount);
     analyser.getByteFrequencyData(freqArray);
 
-    canvasCtx.clearRect(0, 0, 1200, 600);
+    canvasCtx.clearRect(0, 0, 1200, 650);
     canvasCtx.fillStyle=gradient;
     drawSpectrum(freqArray);
 

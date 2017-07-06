@@ -22,6 +22,9 @@ line-height: 1.1666666666;
 background: #eceff1;
 
 color: #88dade;
+display: flex;
+flex-flow: column;
+/*justify-content: center;*/
 }
 
 
@@ -80,3 +83,37 @@ text {
   display: block;
   background: #ff5c5c;
 }
+
+.fa, h1 {
+  color: #ff5c5c;
+  font-size: 24px;
+}
+
+.fa:hover {
+  color: #88dade;
+}
+
+.instructions {
+  position: absolute;
+  margin-top: 100px;
+  margin-left: 353px;
+  width: 1200px;
+  height: 910px;
+  /*display: block;*/
+  /*margin: 0 auto;*/
+  display: none;
+}
+
+.x {
+  position: absolute;
+  font-size: 36px;
+  font-weight: bold;
+  color: black;
+  margin-left: 1415px;
+  margin-top: 150px;
+
+}
+
+
+@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700);
+@import url(https://raw.github.com/FortAwesome/Font-Awesome/master/docs/assets/css/font-awesome.min.css);
