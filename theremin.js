@@ -4,18 +4,22 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
   let canvas = document.getElementById('canvas');
+  let canvasCtx = canvas.getContext('2d');
   let output = document.getElementById('output');
 
 
 
-  let synth = new (window.AudioContext)();
-  let osc = synth.createOscillator();
-  let gain = synth.createGain();
+  let theremin = new (window.AudioContext || window.webkitAudioContext)();
+  let analyser = theremin.createAnalyser();
+
+  let osc = theremin.createOscillator();
+  let gain = theremin.createGain();
 
   osc.type = 'sine';
   osc.connect(gain);
   gain.gain.value = 0;
-  gain.connect(synth.destination);
+  gain.connect(theremin.destination);
+  osc.connect(analyser);
   osc.start();
 
   let active = false;
@@ -61,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     gain.gain.value = 0;
   }
 
-  let waveShapes = document.getElementsByClassName('shape');
+  let waveShapes = document.getElementsByClassName('oscType');
 
   for (i=0;i<waveShapes.length;i++){
     waveShapes[i].addEventListener('click',function(){
@@ -74,4 +78,36 @@ document.addEventListener("DOMContentLoaded", function(event) {
   }
 
 
+
+// visualization
+  analyser.fftSize = 512;
+  analyser.smoothingTimeConstant = 0;
+  let bufferLength = analyser.frequencyBinCount;
+  let dataArray = new Uint8Array(bufferLength);
+  analyser.getByteTimeDomainData(dataArray);
+
+  canvasCtx.clearRect(0, 0, 1700, 600);
+
+  function draw() {
+    drawVisual = requestAnimationFrame(draw);
+    
+    analyser.getByteTimeDomainData(dataArray);
+    canvasCtx.fillStyle = '#ff5c5c';
+    canvasCtx.fillRect(0, 0, 1700, 600);
+
+    let barWidth = (1700 / bufferLength) * 2.5;
+    let barHeight;
+    let x = 0;
+
+    for(let i = 0; i < bufferLength; i++) {
+        barHeight = dataArray[i]*2;
+
+        canvasCtx.fillStyle = '#fff952';
+        canvasCtx.fillRect(x,600-barHeight/2,barWidth,barHeight);
+
+        x += barWidth + 1;
+      }
+    };
+
+    draw();
 });
