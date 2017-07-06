@@ -80,34 +80,56 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
 // visualization
-  analyser.fftSize = 512;
+  analyser.fftSize = 4096;
   analyser.smoothingTimeConstant = 0;
+
   let bufferLength = analyser.frequencyBinCount;
   let dataArray = new Uint8Array(bufferLength);
   analyser.getByteTimeDomainData(dataArray);
 
-  canvasCtx.clearRect(0, 0, 1700, 600);
+  let processer = theremin.createScriptProcessor(2048, 1, 1);
+  processer.connect(theremin.destination)
 
-  function draw() {
-    drawVisual = requestAnimationFrame(draw);
-    
-    analyser.getByteTimeDomainData(dataArray);
-    canvasCtx.fillStyle = '#ff5c5c';
-    canvasCtx.fillRect(0, 0, 1700, 600);
+ let sourceNode = theremin.createBufferSource();
+ sourceNode.connect(analyser);
+ analyser.connect(processer);
 
-    let barWidth = (1700 / bufferLength) * 2.5;
-    let barHeight;
-    let x = 0;
+  // sourceNode.connect(theremin.destination);
 
-    for(let i = 0; i < bufferLength; i++) {
-        barHeight = dataArray[i]*2;
+  processer.onaudioprocess = function() {
+    let gradient = canvasCtx.createLinearGradient(0, 0, 0, 600);
+      gradient.addColorStop(1,'#fff952');
+      gradient.addColorStop(0.75,'#fff952');
+      gradient.addColorStop(0.25,'#fff952');
+      gradient.addColorStop(0,'#fff952');
 
-        canvasCtx.fillStyle = '#fff952';
-        canvasCtx.fillRect(x,600-barHeight/2,barWidth,barHeight);
+    let freqArray =  new Uint8Array(analyser.frequencyBinCount);
+    analyser.getByteFrequencyData(freqArray);
+    let average = getAverageVolume(freqArray);
 
-        x += barWidth + 1;
-      }
-    };
+    canvasCtx.clearRect(0, 0, 1700, 600);
+    canvasCtx.fillStyle=gradient;
+    drawSpectrum(freqArray);
 
-    draw();
+  };
+
+   function drawSpectrum(array) {
+   for ( let i = 0; i < (array.length); i++ ){
+           let value = array[i];
+           canvasCtx.fillRect(i*5,600-value,4,600);
+       }
+   }
+
+  function getAverageVolume(array) {
+    let values = 0;
+
+    let length = array.length;
+
+    for (let i = 0; i < length; i++) {
+        values += array[i];
+    }
+    const average = values / length;
+    return average;
+  }
+
 });
