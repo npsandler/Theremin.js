@@ -3,13 +3,19 @@
     <head>
         <meta charset="utf-8" />
         <title>theremin.js</title>
-         <link rel="stylesheet" href="styles.css">
-         <link rel="stylesheet" href="slider_styles.css">
+         <link rel="stylesheet" href="./styles/styles.css">
+         <link rel="stylesheet" href="./styles/slider.css">
+         <link rel="stylesheet" href="./styles/font-awesome.css">
     </head>
-    <body border="10px solid red">
+    <body>
         <h1>Theremin.js</h1>
+        <section class="links">
+          <a href="https://www.linkedin.com/in/npsandler/"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+          <a href="https://github.com/npsandler"><i class="fa fa-github" ></i></a>
+          <a href="https://angel.co/nathaniel-sandler"><i class="fa fa-angellist" aria-hidden="true"></i></a>
+        </section>
         <script src="theremin.js"></script>
-        <canvas id="canvas" height="650" width="1700"></canvas>
+        <canvas id="canvas" height="650" width="1200"></canvas>
         <section class=bottom>
           <section class=waves>
             <input value=&#8767; class="oscType" id="sine" type=button>
@@ -18,9 +24,15 @@
             <input value=&#9649; class="oscType" id="sawtooth" type=button>
           </section>
           <section class="sliders">
-            <input type="range" class="slider" id="delay"/>
-            <input type="range" class="slider" id="feedback"/>
-            <input type="range" class="slider" id="scuzz"/>
+            <div>
+              <input type="range" class="slider" id="delay"/> <text>Delay</text>
+            </div>
+            <div>
+              <input type="range" class="slider" id="feedback"/> <text>Feedback</text>
+            </div>
+            <div>
+              <input type="range" class="slider" id="scuzz"/> <text>Scuzz</text>
+            </div>
           </section>
         </section>
         <div id=output></div>

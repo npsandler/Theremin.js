@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     release(e);
   });
 
+
   let width = canvas.offsetWidth;
   let height = canvas.offsetHeight;
   function capture(e){
@@ -63,6 +64,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
   function release(e){
     active = false;
     gain.gain.value = 0;
+    canvasCtx.clearRect(0, 0, 1200, 600);
+    debugger
   }
 
   let waveShapes = document.getElementsByClassName('oscType');
@@ -80,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
 // visualization
-  analyser.fftSize = 4096;
+  analyser.fftSize = 8192;
   analyser.smoothingTimeConstant = 0;
 
   let bufferLength = analyser.frequencyBinCount;
@@ -94,20 +97,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
  sourceNode.connect(analyser);
  analyser.connect(processer);
 
-  // sourceNode.connect(theremin.destination);
 
   processer.onaudioprocess = function() {
-    let gradient = canvasCtx.createLinearGradient(0, 0, 0, 600);
+    let gradient = canvasCtx.createLinearGradient(0, 0, 0, 400);
       gradient.addColorStop(1,'#fff952');
-      gradient.addColorStop(0.75,'#fff952');
-      gradient.addColorStop(0.25,'#fff952');
-      gradient.addColorStop(0,'#fff952');
+      gradient.addColorStop(0.9,'#ffcd51');
+      gradient.addColorStop(0.7,'#ff8251');
+      gradient.addColorStop(0.1,'#f42424');
 
     let freqArray =  new Uint8Array(analyser.frequencyBinCount);
     analyser.getByteFrequencyData(freqArray);
-    let average = getAverageVolume(freqArray);
 
-    canvasCtx.clearRect(0, 0, 1700, 600);
+    canvasCtx.clearRect(0, 0, 1200, 600);
     canvasCtx.fillStyle=gradient;
     drawSpectrum(freqArray);
 
@@ -115,21 +116,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
    function drawSpectrum(array) {
    for ( let i = 0; i < (array.length); i++ ){
-           let value = array[i];
-           canvasCtx.fillRect(i*5,600-value,4,600);
-       }
+           let barHeight = array[i] * 2.5;
+           canvasCtx.fillRect(i*5, (650-barHeight), 4, barHeight);
    }
+ }
 
-  function getAverageVolume(array) {
-    let values = 0;
-
-    let length = array.length;
-
-    for (let i = 0; i < length; i++) {
-        values += array[i];
-    }
-    const average = values / length;
-    return average;
-  }
 
 });
