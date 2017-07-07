@@ -15,10 +15,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
   let osc = theremin.createOscillator();
   let gain = theremin.createGain();
 
+
   let delay = theremin.createDelay();
   let distortion = theremin.createWaveShaper();
   let filter = theremin.createBiquadFilter();
   let delayFeedback = theremin.createGain();
+  let reverb = theremin.createConvolver();
 
   //set up defaults, connect effects to oscillator
   osc.type = 'triangle';
@@ -29,6 +31,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
   gain.connect(theremin.destination);
+  filter.connect(reverb);
+  reverb.connect(gain);
+
 
   osc.connect(analyser);
   osc.start();
@@ -36,7 +41,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
   let active = false;
   let volume = 0;
   let freq = 0;
-
+  reverb.buffer = theremin.createBuffer(2, 2, theremin.sampleRate);
+  debugger
   // Mouse event handling
   canvas.addEventListener('mousedown', (e) => {
     capture(e);
@@ -123,30 +129,32 @@ document.addEventListener("DOMContentLoaded", function(event) {
   });
 
   disortionSlider.addEventListener("change", function() {
-    makeDistortionCurve(this.value);
+    distortion.curve = makeDistortionCurve(this.value);
+    console.log(distortion.curve);
   });
 
   analyser.connect(distortion);
   distortion.connect(filter);
 
   // distortion algorithm --
-  function makeDistortionCurve(sliderValue) {
-    let distortionAmount = sliderValue *3
-    n_samples = 44100;
-    curve = new Float32Array(n_samples);
-    let deg = Math.PI / 180;
-    let x;
-    for ( let i = 0; i < n_samples; ++i ) {
+  function makeDistortionCurve(amount) {
+      let dist = amount;
+      let n_samples = 44100;
+      let curve = new Float32Array(n_samples);
+      let deg = Math.PI / 180;
+      let i = 0;
+      let x;
+    for ( ; i < n_samples; ++i ) {
       x = i * 2 / n_samples - 1;
-      curve[i] = ( 3 + distortionAmount ) * x * 20 * deg / ( Math.PI + distortionAmount * Math.abs(x) );
+      curve[i] = ( 3 + dist ) * x * 20 * deg / ( Math.PI + dist * Math.abs(x) );
     }
-    distortion.curve = curve;
-  }
+    return curve;
+  };
 
 
 
   // visualization
-  analyser.fftSize = 8192;
+  analyser.fftSize = 4096;
   analyser.smoothingTimeConstant = 0;
 
   let bufferLength = analyser.frequencyBinCount;
@@ -181,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   function drawSpectrum(array) {
     for ( let i = 0; i < (array.length); i++ ){
      let barHeight = array[i] * -2.6;
-     canvasCtx.fillRect(i*20, 650, 18, barHeight);
+     canvasCtx.fillRect(i*20, 650, 18, barHeight+25);
    }
   }
 
