@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
   let delay = theremin.createDelay();
-  let distortion = theremin.createWaveShaper();
+  // let distortion = theremin.createWaveShaper();
   let filter = theremin.createBiquadFilter();
   let delayFeedback = theremin.createGain();
   let reverb = theremin.createConvolver();
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   let active = false;
   let volume = 0;
   let freq = 0;
-  reverb.buffer = theremin.createBuffer(2, 2, theremin.sampleRate);
+  reverb.buffer = theremin.createBuffer(1, 44100, theremin.sampleRate);
   debugger
   // Mouse event handling
   canvas.addEventListener('mousedown', (e) => {
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   // effect sliders
   let delaySlider = document.getElementById('delayInput');
   let feedbackSlider = document.getElementById('feedbackInput');
-  let disortionSlider = document.getElementById('distortionInput');
+  // let disortionSlider = document.getElementById('distortionInput');
   let delayVal = 0.3;
   let feedbackVal = 0.4;
   let distorionVal = 0;
@@ -128,28 +128,28 @@ document.addEventListener("DOMContentLoaded", function(event) {
     feedbackVal = this.value/200;
   });
 
-  disortionSlider.addEventListener("change", function() {
-    distortion.curve = makeDistortionCurve(this.value);
-    console.log(distortion.curve);
-  });
-
-  analyser.connect(distortion);
-  distortion.connect(filter);
-
-  // distortion algorithm --
-  function makeDistortionCurve(amount) {
-      let dist = amount;
-      let n_samples = 44100;
-      let curve = new Float32Array(n_samples);
-      let deg = Math.PI / 180;
-      let i = 0;
-      let x;
-    for ( ; i < n_samples; ++i ) {
-      x = i * 2 / n_samples - 1;
-      curve[i] = ( 3 + dist ) * x * 20 * deg / ( Math.PI + dist * Math.abs(x) );
-    }
-    return curve;
-  };
+  // disortionSlider.addEventListener("change", function() {
+  //   distortion.curve = makeDistortionCurve(this.value);
+  //   console.log(distortion.curve);
+  // });
+  //
+  // analyser.connect(distortion);
+  // distortion.connect(filter);
+  //
+  // // distortion algorithm --
+  // function makeDistortionCurve(amount) {
+  //     let dist = amount;
+  //     let n_samples = 44100;
+  //     let curve = new Float32Array(n_samples);
+  //     let deg = Math.PI / 180;
+  //     let i = 0;
+  //     let x;
+  //   for ( ; i < n_samples; ++i ) {
+  //     x = i * 2 / n_samples - 1;
+  //     curve[i] = ( 3 + dist ) * x * 20 * deg / ( Math.PI + dist * Math.abs(x) );
+  //   }
+  //   return curve;
+  // };
 
 
 
