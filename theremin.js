@@ -14,11 +14,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   let osc = theremin.createOscillator();
   let gain = theremin.createGain();
+
   let delay = theremin.createDelay();
+  let distortion = theremin.createWaveShaper();
   let delayFilter = theremin.createBiquadFilter();
   let delayFeedback = theremin.createGain();
+
   //set up defaults, connect effects to oscillator
-  osc.type = 'sine';
+  osc.type = 'triangle';
   osc.connect(gain);
   osc.connect(delay);
 
@@ -34,15 +37,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   let volume = 0;
   let freq = 0;
 
-
-
-
-
-
-
-
-
-  //
+  // Mouse event handling
   canvas.addEventListener('mousedown', (e) => {
     capture(e);
   });
@@ -96,70 +91,56 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   function release(e){
     active = false;
-    delay.disconnect(theremin.destination);
-    delay.disconnect(delayFeedback);
-    delayFeedback.disconnect(delayFilter);
-    delayFilter.disconnect(delay);
-    gain.gain.value = 0;
     osc.frequency.value = 0;
-    delayFilter.frequency.value = 0;
-    delayFeedback.gain.value = 0;
     canvasCtx.clearRect(0, 0, 1200, 650);
-
     output.innerHTML = '';
-
   }
 
 
   //sound wave buttons
   let waveShapes = document.getElementsByClassName('oscType');
+
+  for (i=0; i < waveShapes.length; i++){
+    waveShapes[i].addEventListener('click',function(){
+      osc.type = this.id;
+    });
+  }
+
+  // effect sliders
   let delaySlider = document.getElementById('delayInput');
   let feedbackSlider = document.getElementById('feedbackInput');
   let disortionSlider = document.getElementById('distortionInput');
   let delayVal = 0.3;
   let feedbackVal = 0.4;
-  let distorionVal;
+  let distorionVal = 0;
 
+  //update slider vals
   delaySlider.addEventListener("change", function() {
     delayVal = this.value/100;
   });
 
   feedbackSlider.addEventListener("change", function() {
-    debugger
     feedbackVal = this.value/200;
-    console.log
   });
 
   disortionSlider.addEventListener("change", function() {
-    // TODO: ???????val?
     distorionVal = this.value;
   });
-  //
-  //  controls.find("input[name='delayTime']").on('input', function() {
-  //    delay.delayTime.value = $(this).val();
-  //  });
-  //
-  //  controls.find("input[name='feedback']").on('input', function() {
-  //    feedback.gain.value = $(this).val();
-  //  });
-  //
-  //  controls.find("input[name='frequency']").on('input', function() {
-  //    filter.frequency.value = $(this).val();
-  //  });
 
-
-
-
-  // effect sliders
-  let sliders = document.getElementsByClassName('slider');
-  for (i=0; i < sliders.length; i++){
-    sliders[i].addEventListener('change',function(){
-    });
-  }
-  //update slider vals
-  function updateVal(val) {
-    document.getElementById('textInput').value=val;
-  }
+  // distortion algorithm
+  function makeDistortionCurve(amount) {
+    var k = typeof amount === 'number' ? amount : 50,
+      n_samples = 44100,
+      curve = new Float32Array(n_samples),
+      deg = Math.PI / 180,
+      i = 0,
+      x;
+    for ( ; i < n_samples; ++i ) {
+      x = i * 2 / n_samples - 1;
+      curve[i] = ( 3 + k ) * x * 20 * deg / ( Math.PI + k * Math.abs(x) );
+    }
+    return curve;
+  };
 
 
 
