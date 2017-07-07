@@ -120,10 +120,9 @@ text {
 #instructions {
   position: absolute;
   display: block;
-  /*margin-top: 6.8%;
-  margin-left: 18.5%;*/
+
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 
 #open:hover {

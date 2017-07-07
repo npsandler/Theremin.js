@@ -130,17 +130,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
   distortion.connect(filter);
 
   // distortion algorithm --
-  function makeDistortionCurve(amount) {
-      n_samples = 44100;
-      curve = new Float32Array(n_samples);
-      let deg = Math.PI / 180;
-      let x;
+  function makeDistortionCurve(sliderValue) {
+    let distortionAmount = sliderValue *3
+    n_samples = 44100;
+    curve = new Float32Array(n_samples);
+    let deg = Math.PI / 180;
+    let x;
     for ( let i = 0; i < n_samples; ++i ) {
       x = i * 2 / n_samples - 1;
-      curve[i] = ( 3 + amount ) * x * 20 * deg / ( Math.PI + amount * Math.abs(x) );
+      curve[i] = ( 3 + distortionAmount ) * x * 20 * deg / ( Math.PI + distortionAmount * Math.abs(x) );
     }
     distortion.curve = curve;
-    console.log(distortion.curve);
   }
 
 
@@ -180,8 +180,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   function drawSpectrum(array) {
     for ( let i = 0; i < (array.length); i++ ){
-     let barHeight = array[i] * 2.6;
-     canvasCtx.fillRect(i*8, (650-barHeight), 6, barHeight);
+     let barHeight = array[i] * -2.6;
+     canvasCtx.fillRect(i*20, 650, 18, barHeight);
    }
   }
 
