@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   let delay = theremin.createDelay();
   let distortion = theremin.createWaveShaper();
-  let delayFilter = theremin.createBiquadFilter();
+  let filter = theremin.createBiquadFilter();
   let delayFeedback = theremin.createGain();
 
   //set up defaults, connect effects to oscillator
@@ -76,13 +76,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
     delay.delayTime.value = delayVal;
     delay.connect(theremin.destination);
 
-    // TODO: dont let get above 0.5
     delayFeedback.gain.value = feedbackVal;
 
-    delayFilter.frequency.value = 500;
+    filter.frequency.value = 500;
     delay.connect(delayFeedback);
-    delayFeedback.connect(delayFilter);
-    delayFilter.connect(delay);
+    delayFeedback.connect(filter);
+    filter.connect(delay);
 
     osc.connect(theremin.destination);
     delay.connect(theremin.destination);
@@ -124,23 +123,25 @@ document.addEventListener("DOMContentLoaded", function(event) {
   });
 
   disortionSlider.addEventListener("change", function() {
-    distorionVal = this.value;
+    makeDistortionCurve(this.value);
   });
 
-  // distortion algorithm
+  analyser.connect(distortion);
+  distortion.connect(filter);
+
+  // distortion algorithm --
   function makeDistortionCurve(amount) {
-    var k = typeof amount === 'number' ? amount : 50,
-      n_samples = 44100,
-      curve = new Float32Array(n_samples),
-      deg = Math.PI / 180,
-      i = 0,
-      x;
-    for ( ; i < n_samples; ++i ) {
+      n_samples = 44100;
+      curve = new Float32Array(n_samples);
+      let deg = Math.PI / 180;
+      let x;
+    for ( let i = 0; i < n_samples; ++i ) {
       x = i * 2 / n_samples - 1;
-      curve[i] = ( 3 + k ) * x * 20 * deg / ( Math.PI + k * Math.abs(x) );
+      curve[i] = ( 3 + amount ) * x * 20 * deg / ( Math.PI + amount * Math.abs(x) );
     }
-    return curve;
-  };
+    distortion.curve = curve;
+    console.log(distortion.curve);
+  }
 
 
 
