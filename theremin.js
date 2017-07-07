@@ -8,17 +8,24 @@ document.addEventListener("DOMContentLoaded", function(event) {
   let output = document.getElementById('output');
 
 
-
+  //create AudioContext elements
   let theremin = new (window.AudioContext || window.webkitAudioContext)();
   let analyser = theremin.createAnalyser();
 
   let osc = theremin.createOscillator();
   let gain = theremin.createGain();
+  let delay = theremin.createDelay();
 
+  //set up defaults, connect effects to oscillator
   osc.type = 'sine';
   osc.connect(gain);
+  osc.connect(delay);
+
   gain.gain.value = 0;
+
+
   gain.connect(theremin.destination);
+
   osc.connect(analyser);
   osc.start();
 
@@ -26,7 +33,41 @@ document.addEventListener("DOMContentLoaded", function(event) {
   let volume = 0;
   let freq = 0;
 
+  //    feedback = ctx.createGain();
+  //    feedback.gain.value = 0.8;
+  //
+  //    filter = ctx.createBiquadFilter();
+  //    filter.frequency.value = 1000;
+  //
+  //    delay.connect(feedback);
+  //    feedback.connect(filter);
+  //    filter.connect(delay);
+  //
+  //    source.connect(delay);
+  //    source.connect(ctx.destination);
+  //    delay.connect(ctx.destination);
+  //
+  //  var controls = $("div#sliders");
+  //
+  //  controls.find("input[name='delayTime']").on('input', function() {
+  //    delay.delayTime.value = $(this).val();
+  //  });
+  //
+  //  controls.find("input[name='feedback']").on('input', function() {
+  //    feedback.gain.value = $(this).val();
+  //  });
+  //
+  //  controls.find("input[name='frequency']").on('input', function() {
+  //    filter.frequency.value = $(this).val();
+  //  });
 
+
+
+
+
+
+
+  //
   canvas.addEventListener('mousedown', (e) => {
     capture(e);
   });
@@ -45,8 +86,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
   function capture(e){
     e.preventDefault();
     active = true;
-    volume = 1.1 - (((e.clientY)/height*100)/100);
+    volume = 1.3 - (((e.clientY)/height*100)/100);
     freq = 500-1000*(1-((e.clientX)/width))+ 5;
+    delay.delayTime.value = 0.3;
+    delay.connect(theremin.destination);
+    debugger
     osc.frequency.value = freq;
     gain.gain.value = volume;
   }
@@ -54,8 +98,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
   function drag(e){
     e.preventDefault();
     if (active) {
-      volume = 1.1 - (((e.clientY)/height*100)/100);
+      volume = 1.3 - (((e.clientY)/height*100)/100);
       freq = 500-1000*(1-((e.clientX)/width))+ 5;
+      delay.delayTime.value = 0.3;
+      delay.connect(theremin.destination);
       osc.frequency.value = freq;
       gain.gain.value = volume;
     }
@@ -63,6 +109,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   function release(e){
     active = false;
+    debugger
+    theremin.disconnect(delay);
     gain.gain.value = 0;
     canvasCtx.clearRect(0, 0, 1200, 650);
   }
@@ -80,18 +128,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   // effect sliders
   let sliders = document.getElementsByClassName('slider');
-  debugger
   for (i=0; i < sliders.length; i++){
     sliders[i].addEventListener('change',function(){
-      debugger
-      console.log(this)
     });
   }
   //update slider vals
   function updateVal(val) {
     document.getElementById('textInput').value=val;
-    debugger
-    console.log(this);
   }
 
 
@@ -104,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   let dataArray = new Uint8Array(bufferLength);
   analyser.getByteTimeDomainData(dataArray);
   let processer = theremin.createScriptProcessor(2048, 1, 1);
-  processer.connect(theremin.destination)
+  processer.connect(theremin.destination);
 
   let sourceNode = theremin.createBufferSource();
   sourceNode.connect(analyser);
