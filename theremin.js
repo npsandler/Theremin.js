@@ -42,7 +42,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
   let volume = 0;
   let freq = 0;
   reverb.buffer = theremin.createBuffer(1, 44100, theremin.sampleRate);
-  debugger
   // Mouse event handling
   canvas.addEventListener('mousedown', (e) => {
     capture(e);
@@ -170,10 +169,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   processer.onaudioprocess = function() {
     let gradient = canvasCtx.createLinearGradient(0, 0, 0, 400);
-      gradient.addColorStop(1,'#fff952');
-      gradient.addColorStop(0.9,'#ffcd51');
-      gradient.addColorStop(0.7,'#ff8251');
-      gradient.addColorStop(0.1,'#f42424');
+      gradient.addColorStop(1,'#52489C');
+      gradient.addColorStop(0.7,'#73489c');
+      gradient.addColorStop(0.5,'#ad168c');
+      gradient.addColorStop(0.1,'#ad1616');
 
     let freqArray =  new Uint8Array(analyser.frequencyBinCount);
 
