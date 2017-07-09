@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   osc.type = 'triangle';
   osc.connect(gain);
   osc.connect(delay);
-  // osc.connect(reverb);
+  osc.connect(reverb);
   osc.connect(distortion);
 
   distortionFilter.type = 'lowpass';
@@ -50,7 +50,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
   let active = false;
   let volume = 0;
   let freq = 0;
-  reverb.buffer = theremin.createBuffer(1, 44100, theremin.sampleRate);
 
   // Mouse event handling
   canvas.addEventListener('mousedown', (e) => {
@@ -106,7 +105,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     gain.gain.value = 0;
     osc.frequency.value = 0;
 
-
     canvasCtx.clearRect(0, 0, 1200, 650);
   }
 
@@ -123,12 +121,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
   // effect sliders
   let delaySlider = document.getElementById('delayInput');
   let feedbackSlider = document.getElementById('feedbackInput');
-  let distortionSlider = document.getElementById('distortionInput');
-  let reverbSlider = document.getElementById('reverbInput');
+  let distortionToggle = document.getElementById('distortionInput');
+  let reverbToggle = document.getElementById('reverbInput');
   let delayVal = 0.3;
   let feedbackVal = 0.4;
-  let distorionVal = 0;
-
   //update slider vals
   delaySlider.addEventListener("change", function() {
     delayVal = this.value/100;
@@ -138,12 +134,22 @@ document.addEventListener("DOMContentLoaded", function(event) {
     feedbackVal = this.value/200;
   });
 
-  distortionSlider.addEventListener("change", function() {
-    distortion.curve = makeDistortionCurve(this.value);
+  distortionToggle.addEventListener("change", function() {
+    if (distortion.curve) {
+      distortion.curve = undefined;
+    } else {
+        distortion.curve = makeDistortionCurve(150);
+      }
   });
 
-
-
+  reverbToggle.addEventListener("change", function() {
+    debugger
+    if (reverb.buffer) {
+      reverb.buffer = undefined;
+    } else {
+      reverb.buffer = theremin.createBuffer(1, 44100, theremin.sampleRate);
+    }
+  });
 
   // distortion algorithm --
   function makeDistortionCurve(amount) {
@@ -158,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
       curve[i] = ( 3 + dist ) * x * 20 * deg / ( Math.PI + dist * Math.abs(x) );
     }
     return curve;
-  };
+  }
 
 
 

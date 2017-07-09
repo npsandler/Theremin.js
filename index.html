@@ -5,6 +5,7 @@
         <title>theremin.js</title>
          <link rel="stylesheet" href="./styles/styles.css">
          <link rel="stylesheet" href="./styles/slider.css">
+         <link rel="stylesheet" href="./styles/switch.css">
          <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
     </head>
     <body>
@@ -26,17 +27,31 @@
 
         <section class=bottom>
           <section class=waves>
-            <input value="Sine"; class="oscType" id="sine" type=button>
-            <input value="Triangle"; class="oscType" id="triangle" type=button>
-            <input value="Square"; class="oscType" id="square" type=button>
-            <input value="Sawtooth"; class="oscType" id="sawtooth" type=button>
+            <label for="">Wave Shapes</label>
+            <input value="Sine" class="oscType" id="sine" type=button>
+            <input value="Triangle" class="oscType" id="triangle" type=button>
+            <input value="Square" class="oscType" id="square" type=button>
+            <input value="Sawtooth" class="oscType" id="sawtooth" type=button>
           </section>
+
           <section class="switches">
-            <label class="switch">
-              <input type="checkbox">
-              <div class="toggle"></div>
-            </label>
+            <label>Filters</label>
+            <div>
+              <text>Reverb</text>
+              <label class="switch" id="reverbInput">
+                <input type="checkbox">
+                <div class="toggle"></div>
+              </label>
+            </div>
+            <div>
+              <text>Distortion</text>
+              <label class="switch" id="distortionInput">
+                <input type="checkbox">
+                <div class="toggle"></div>
+              </label>
+            </div>
           </section>
+
           <section class="sliders">
             <div>
               <text>Delay</text>
@@ -48,12 +63,8 @@
               <output name="feedbackOutput" id="feedbackOutput">80</output>
               <input type="range" name="feedbackInput" id="feedbackInput" value="80" class="slider" oninput="feedbackOutput.value = feedbackInput.value">
             </div>
-            <div>
-              <text>Distortion</text>
-              <output name="distortionOutput" id="distortionOutput">0</output>
-              <input type="range" name="distortionInput" id="distortionInput" value="0" class="slider" oninput="distortionOutput.value = distortionInput.value">
-            </div>
           </section>
+
         </section>
         <div id=output></div>
     </body>

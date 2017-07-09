@@ -65,20 +65,35 @@ text {
   height: 190px;
   width: 320px;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   border-right: 10px solid black;
   border-left: 10px solid black;
 }
 
-.waves > input {
-  font-size: 80px;
-  vertical-align: top;
+.waves > * {
+  font-size: 24px;
+  /*border: 1px solid #88dade;*/
+  padding: 5px;
   text-align: center;
 }
 
+.waves > label {
+  color: black;
+}
+
 .waves > input:hover {
-    color: #fff952;
-    cursor: pointer;
+  color: #fff952;
+  cursor: pointer;
+}
+
+.switches {
+
+}
+
+.switches {
+  color: black;
+  font-size: 24px;
+  padding: 5px;
 }
 
 .sliders {
