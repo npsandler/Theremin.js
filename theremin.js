@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   osc.type = 'triangle';
   osc.connect(gain);
   osc.connect(delay);
-  osc.connect(reverb);
+  // osc.connect(reverb);
   osc.connect(distortion);
 
   distortionFilter.type = 'lowpass';
@@ -39,9 +39,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
   gain.gain.value = 0;
 
 
-  gain.connect(theremin.destination);
   filter.connect(reverb);
   reverb.connect(gain);
+  gain.connect(theremin.destination);
 
 
   osc.connect(analyser);
@@ -51,6 +51,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   let volume = 0;
   let freq = 0;
   reverb.buffer = theremin.createBuffer(1, 44100, theremin.sampleRate);
+
   // Mouse event handling
   canvas.addEventListener('mousedown', (e) => {
     capture(e);
@@ -91,7 +92,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     delay.connect(theremin.destination);
 
     delayFeedback.gain.value = feedbackVal;
-debugger
     filter.frequency.value = 500;
     delay.connect(delayFeedback);
     delayFeedback.connect(filter);
@@ -99,15 +99,15 @@ debugger
 
     osc.connect(theremin.destination);
     delay.connect(theremin.destination);
-    output.innerHTML = 'Frequency = '+freq+'hz, Volume = '+(volume*100)+'%';
   }
 
   function release(e){
     active = false;
-    osc.frequency.value = 0;
     gain.gain.value = 0;
+    osc.frequency.value = 0;
+
+
     canvasCtx.clearRect(0, 0, 1200, 650);
-    output.innerHTML = '';
   }
 
 
@@ -123,7 +123,8 @@ debugger
   // effect sliders
   let delaySlider = document.getElementById('delayInput');
   let feedbackSlider = document.getElementById('feedbackInput');
-  let disortionSlider = document.getElementById('distortionInput');
+  let distortionSlider = document.getElementById('distortionInput');
+  let reverbSlider = document.getElementById('reverbInput');
   let delayVal = 0.3;
   let feedbackVal = 0.4;
   let distorionVal = 0;
@@ -137,10 +138,9 @@ debugger
     feedbackVal = this.value/200;
   });
 
-  disortionSlider.addEventListener("change", function() {
+  distortionSlider.addEventListener("change", function() {
     distortion.curve = makeDistortionCurve(this.value);
   });
-
 
 
 
@@ -192,7 +192,6 @@ debugger
     canvasCtx.clearRect(0, 0, 1200, 650);
     canvasCtx.fillStyle=gradient;
     drawSpectrum(freqArray);
-
   };
 
   function drawSpectrum(array) {
