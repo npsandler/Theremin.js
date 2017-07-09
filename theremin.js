@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   let delay = theremin.createDelay();
   let distortion = theremin.createWaveShaper();
   let distortionFilter = theremin.createBiquadFilter();
-  let distortionMax = theremin.createGain(1);
+  let distortionMax = theremin.createGain(0.5);
   let filter = theremin.createBiquadFilter();
   let delayFeedback = theremin.createGain();
   let reverb = theremin.createConvolver();
@@ -28,6 +28,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
   osc.type = 'triangle';
   osc.connect(gain);
   osc.connect(delay);
+  osc.connect(reverb);
+  osc.connect(distortion);
+
+  distortionFilter.type = 'lowpass';
+  distortionFilter.connect(distortion);
+  distortionMax.connect(distortion);
+  distortion.connect(gain);
 
   gain.gain.value = 0;
 
@@ -84,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     delay.connect(theremin.destination);
 
     delayFeedback.gain.value = feedbackVal;
-
+debugger
     filter.frequency.value = 500;
     delay.connect(delayFeedback);
     delayFeedback.connect(filter);
@@ -98,6 +105,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   function release(e){
     active = false;
     osc.frequency.value = 0;
+    gain.gain.value = 0;
     canvasCtx.clearRect(0, 0, 1200, 650);
     output.innerHTML = '';
   }
@@ -133,15 +141,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
     distortion.curve = makeDistortionCurve(this.value);
   });
 
-  analyser.connect(distortion);
-  distortionFilter.type = 'lowpass';
-  distortion.connect(distortionFilter);
+
 
 
 
   // distortion algorithm --
   function makeDistortionCurve(amount) {
-      let dist = amount;
+      let dist = amount * 1.5;
       let n_samples = 44100;
       let curve = new Float32Array(n_samples);
       let deg = Math.PI / 180;
