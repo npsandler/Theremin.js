@@ -1,4 +1,20 @@
-/* The switch - the box around the toggle */
+.switches {
+  display: flex;
+  justify-content: space-around;
+  width: 300px;
+}
+
+
+.buttons {
+  margin: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  align-content: flex-end;
+  align-items: flex-end;
+}
+
 .switch {
   position: relative;
   display: inline-block;
@@ -6,10 +22,8 @@
   height: 34px;
 }
 
-/* Hide default HTML checkbox */
 .switch input {display:none;}
 
-/* The toggle */
 .toggle {
   position: absolute;
   cursor: pointer;
@@ -35,7 +49,7 @@
 }
 
 input:checked + .toggle {
-  background-color: #2196F3;
+    background: #52489C;
 }
 
 input:focus + .toggle {

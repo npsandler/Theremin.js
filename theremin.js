@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   //create AudioContext elements
   let theremin = new (window.AudioContext || window.webkitAudioContext)();
   let analyser = theremin.createAnalyser();
+  analyser.smoothingTimeConstant = 0.85;
 
   let osc = theremin.createOscillator();
   let gain = theremin.createGain();
@@ -25,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   let reverb = theremin.createConvolver();
 
   //set up defaults, connect effects to oscillator
-  osc.type = 'triangle';
+  osc.type = 'sine';
   osc.connect(gain);
   osc.connect(delay);
   osc.connect(reverb);
@@ -39,8 +40,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
   gain.gain.value = 0;
 
 
-  filter.connect(reverb);
-  reverb.connect(gain);
+
+
   gain.connect(theremin.destination);
 
 
@@ -84,11 +85,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
     volume = 1.3 - (((e.clientY)/height*100)/100);
     freq = 500-1000*(1-((e.clientX)/width))+ 5;
 
+
+
     osc.frequency.value = freq;
     gain.gain.value = volume;
 
     delay.delayTime.value = delayVal;
     delay.connect(theremin.destination);
+    filter.connect(reverb);
+    reverb.connect(gain);
 
     delayFeedback.gain.value = feedbackVal;
     filter.frequency.value = 500;
@@ -143,12 +148,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
   });
 
   reverbToggle.addEventListener("change", function() {
-    debugger
     if (reverb.buffer) {
       reverb.buffer = undefined;
     } else {
       reverb.buffer = theremin.createBuffer(1, 44100, theremin.sampleRate);
-    }
+      }
   });
 
   // distortion algorithm --
@@ -191,7 +195,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
       gradient.addColorStop(0.1,'#17142B');
 
     let freqArray =  new Uint8Array(analyser.frequencyBinCount);
-
     analyser.getByteFrequencyData(freqArray);
 
 
@@ -206,6 +209,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
      canvasCtx.fillRect(i*20, 650, 18, barHeight+25);
    }
   }
+
+
 
 
 });

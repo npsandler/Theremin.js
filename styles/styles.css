@@ -21,7 +21,7 @@ font-size: 16px;
 line-height: 1.1666666666;
 background: #eceff1;
 
-color: #88dade;
+color: white;
 display: flex;
 flex-flow: column;
 }
@@ -82,25 +82,27 @@ text {
 }
 
 .waves > input:hover {
-  color: #fff952;
+  color: #88dade;
   cursor: pointer;
 }
 
-.switches {
-
-}
 
 .switches {
-  color: black;
+  color: white;
   font-size: 24px;
   padding: 5px;
 }
 
+.switches > label {
+  color: black;
+}
+
 .sliders {
   border-right: 10px solid black;
-  width: 1170px;
+  width: 500px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   background: #ff5c5c;
 }
 
@@ -110,9 +112,13 @@ text {
   justify-content: flex-end;
 }
 
-.sliders > div > * {
-  margin-right: 10px;
+.sliders > div:first-of-type > text, output {
+    margin-top: 23px;
+}
 
+.sliders > div > * {
+
+  margin-right: 10px;
 }
 
 
@@ -138,6 +144,10 @@ text {
   width: 100%;
   height: auto;
   margin: auto;
+}
+
+#open {
+  color: #88dade;
 }
 
 #open:hover {
