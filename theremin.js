@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   let canvas = document.getElementById('canvas');
   let canvasCtx = canvas.getContext('2d');
-  let output = document.getElementById('output');
 
 
   //create AudioContext elements
@@ -27,12 +26,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
   let reverb = theremin.createConvolver();
 
   //set up defaults
-
-
   distortionFilter.type = 'lowpass';
   distortionFilter.connect(distortion);
   distortionMax.connect(distortion);
   distortion.connect(gain);
+
+  filter.connect(reverb);
+  reverb.connect(gain);
 
   gain.gain.value = 0;
   gain.connect(theremin.destination);
@@ -69,6 +69,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
     osc.connect(reverb);
     osc.connect(distortion);
     osc.connect(analyser);
+
+    debugger
+
     osc.start();
 
     handleSound(e);
@@ -88,10 +91,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
     osc.frequency.value = freq;
     gain.gain.value = volume;
 
+    osc.connect(theremin.destination);
+    delay.connect(theremin.destination);
+
     delay.delayTime.value = delayVal;
     delay.connect(theremin.destination);
-    filter.connect(reverb);
-    reverb.connect(gain);
+
 
 
     delayFeedback.gain.value = feedbackVal;
@@ -100,8 +105,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     delayFeedback.connect(filter);
     filter.connect(delay);
 
-    osc.connect(theremin.destination);
-    delay.connect(theremin.destination);
   }
 
   function release(e){
@@ -149,8 +152,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     if (reverb.buffer) {
       reverb.buffer = undefined;
     } else {
-      debugger
-      reverb.buffer = theremin.createBuffer(1, 44100, theremin.sampleRate);
+      reverb.buffer = theremin.createBuffer(2, 44100, theremin.sampleRate);
       }
   });
 
