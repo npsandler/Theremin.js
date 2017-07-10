@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     delay.delayTime.value = delayVal;
     delay.connect(theremin.destination);
-    // filter.connect(reverb);
+    filter.connect(reverb);
     reverb.connect(gain);
 
 
