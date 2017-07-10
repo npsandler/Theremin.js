@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     };
 
     window.onclick = function(event) {
-        if ((event.target === instructions) && (event.target !== open)) {
+        if (event.target !== open) {
             instructions.style.display = "none";
         }
       };

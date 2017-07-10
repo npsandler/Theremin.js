@@ -90,8 +90,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     delay.delayTime.value = delayVal;
     delay.connect(theremin.destination);
-    filter.connect(reverb);
+    // filter.connect(reverb);
     reverb.connect(gain);
+
 
     delayFeedback.gain.value = feedbackVal;
     filter.frequency.value = 500;
@@ -126,6 +127,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   let reverbToggle = document.getElementById('reverbInput');
   let delayVal = 0.3;
   let feedbackVal = 0.4;
+
   //update slider vals
   delaySlider.addEventListener("change", function() {
     delayVal = this.value/100;
@@ -147,6 +149,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     if (reverb.buffer) {
       reverb.buffer = undefined;
     } else {
+      debugger
       reverb.buffer = theremin.createBuffer(1, 44100, theremin.sampleRate);
       }
   });

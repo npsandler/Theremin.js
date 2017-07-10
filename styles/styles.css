@@ -99,7 +99,8 @@ text {
 
 .sliders {
   border-right: 10px solid black;
-  width: 500px;
+  padding-right: 40px;
+  width: 600px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -141,9 +142,12 @@ text {
 #instructions {
   position: fixed;
   display: block;
-  width: 100%;
+  width: 50%;
   height: auto;
-  margin: auto;
+  z-index: 5;
+  margin: 9% 25%;
+  border: 10px solid black;
+  border-radius: 5%;
 }
 
 #open {
