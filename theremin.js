@@ -13,7 +13,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
   let analyser = theremin.createAnalyser();
   analyser.smoothingTimeConstant = 0.85;
 
-  let osc = theremin.createOscillator();
+  let osc;
+  let waveShape = "sine";
   let gain = theremin.createGain();
 
 
@@ -25,12 +26,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
   let delayFeedback = theremin.createGain();
   let reverb = theremin.createConvolver();
 
-  //set up defaults, connect effects to oscillator
-  osc.type = 'sine';
-  osc.connect(gain);
-  osc.connect(delay);
-  osc.connect(reverb);
-  osc.connect(distortion);
+  //set up defaults
+
 
   distortionFilter.type = 'lowpass';
   distortionFilter.connect(distortion);
@@ -38,15 +35,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   distortion.connect(gain);
 
   gain.gain.value = 0;
-
-
-
-
   gain.connect(theremin.destination);
-
-
-  osc.connect(analyser);
-  osc.start();
 
   let active = false;
   let volume = 0;
@@ -71,6 +60,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
   function capture(e){
     e.preventDefault();
     active = true;
+
+    osc = theremin.createOscillator();
+    osc.type = waveShape;
+
+    osc.connect(gain);
+    osc.connect(delay);
+    osc.connect(reverb);
+    osc.connect(distortion);
+    osc.connect(analyser);
+    osc.start();
+
     handleSound(e);
   }
 
@@ -84,8 +84,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
   function handleSound(e) {
     volume = 1.3 - (((e.clientY)/height*100)/100);
     freq = 500-1000*(1-((e.clientX)/width))+ 5;
-
-
 
     osc.frequency.value = freq;
     gain.gain.value = volume;
@@ -108,9 +106,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   function release(e){
     active = false;
     gain.gain.value = 0;
-    osc.frequency.value = 0;
-
-    canvasCtx.clearRect(0, 0, 1200, 650);
+    osc.stop();
   }
 
 
@@ -119,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   for (i=0; i < waveShapes.length; i++){
     waveShapes[i].addEventListener('click',function(){
-      osc.type = this.id;
+      waveShape = this.id;
     });
   }
 
