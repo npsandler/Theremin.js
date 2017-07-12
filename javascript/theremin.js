@@ -64,6 +64,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   processer.onaudioprocess = function() {
     let gradient = canvasCtx.createLinearGradient(0, 0, 0, HEIGHT);
       gradient.addColorStop(1,'#52489C');
+      
       // gradient.addColorStop(0.7,'#3C3572');
       // gradient.addColorStop(0.5,'#262147');
       // gradient.addColorStop(0.1,'#17142B');
