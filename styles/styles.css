@@ -16,7 +16,7 @@ button, article, footer, small {
 }
 
 body {
-font-family: sans-serif;
+font-family: 'Bungee Inline', cursive;
 font-size: 16px;
 line-height: 1.1666666666;
 background: #eceff1;
@@ -160,6 +160,7 @@ text {
 
 #open {
   color: #88dade;
+  font-family: sans-serif;
 }
 
 #open:hover {

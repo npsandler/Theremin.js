@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   processer.onaudioprocess = function() {
     let gradient = canvasCtx.createLinearGradient(0, 0, 0, HEIGHT);
       gradient.addColorStop(1,'#52489C');
-      
+
       // gradient.addColorStop(0.7,'#3C3572');
       // gradient.addColorStop(0.5,'#262147');
       // gradient.addColorStop(0.1,'#17142B');
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
      let barWidth = (WIDTH / bufferLength) * 5;
      debugger
      for(var i = 0; i < bufferLength; i++) {
-       barHeight = array[i] * -2 * volume;
+       barHeight = (array[i] * -2 * volume) - 40;
 
 
        canvasCtx.fillRect(x,HEIGHT/3,barWidth,barHeight/3);
