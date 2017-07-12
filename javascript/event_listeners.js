@@ -111,7 +111,7 @@ function handleSound(e) {
   let width = window.canvas.offsetWidth;
   let height = window.canvas.offsetHeight;
 
-  volume = 1 - (((e.clientY)/height*100)/100);
+  volume = .8 - (((e.clientY)/height*100)/100);
   freq = 500-1000*(1-((e.clientX)/width))+ 5;
 
   osc.frequency.value = freq;

@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
      let barWidth = (WIDTH / bufferLength) * 5;
      debugger
      for(var i = 0; i < bufferLength; i++) {
-       barHeight = (array[i] * -2 * volume) - 40;
+       barHeight = (array[i] * -2 * (volume)) - 50;
 
 
        canvasCtx.fillRect(x,HEIGHT/3,barWidth,barHeight/3);

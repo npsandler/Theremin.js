@@ -1,11 +1,11 @@
-.switches {
+/*.switches {
   display: flex;
   justify-content: space-around;
   width: 30%;
-}
+}*/
 
 
-.buttons {
+/*.buttons {
   margin: auto;
   width: 100%;
   display: flex;
@@ -13,13 +13,19 @@
   padding: 5px;
   align-content: flex-end;
   align-items: flex-end;
-}
+}*/
+
 
 .switch {
   position: relative;
   display: inline-block;
   width: 60px;
   height: 34px;
+}
+
+.toggle-div {
+  display: flex;
+  flex-direction: column;
 }
 
 .switch input {display:none;}

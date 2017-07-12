@@ -97,15 +97,12 @@ text {
 }
 
 
-.switches {
+/*.switches {
   color: white;
   font-size: 24px;
   padding: 5px;
 }
 
-.switches > label {
-  color: black;
-}
 
 .sliders {
   border-right: 5px solid black;
@@ -125,7 +122,25 @@ text {
 
 .sliders > div:first-of-type > text, output {
     margin-top: 23px;
+}*/
+.filters {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-right: 5px solid black;
 }
+
+.filters > label {
+  color: black;
+  padding: 1%;
+}
+
+.filter-row {
+  display: flex;
+  justify-content: space-between;
+    padding: 0 20%;
+}
+
 
 
 

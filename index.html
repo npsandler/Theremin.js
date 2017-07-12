@@ -29,45 +29,50 @@
         <canvas id="canvas"></canvas>
 
         <section class=bottom>
-          <section class=waves>
-            <label for="">Wave Shapes</label>
-            <input value="Sine" class="oscType default" id="sine" type=button>
-            <input value="Triangle" class="oscType" id="triangle" type=button>
-            <input value="Square" class="oscType" id="square" type=button>
-            <input value="Sawtooth" class="oscType" id="sawtooth" type=button>
-          </section>
+            <section class=waves>
+              <label for="">Wave Shapes</label>
+              <input value="Sine" class="oscType default" id="sine" type=button>
+              <input value="Triangle" class="oscType" id="triangle" type=button>
+              <input value="Square" class="oscType" id="square" type=button>
+              <input value="Sawtooth" class="oscType" id="sawtooth" type=button>
+            </section>
 
-          <section class="switches">
-            <label>Filters</label>
-            <section class="buttons">
-              <div>
-                <text>Reverb</text>
-                <label class="switch" id="reverbInput">
-                  <input type="checkbox">
-                  <div class="toggle"></div>
-                </label>
-              </div>
-              <div>
-                <text>Distortion</text>
-                <label class="switch" id="distortionInput">
-                  <input type="checkbox">
-                  <div class="toggle"></div>
-                </label>
-              </div>
-          </section>
-        </section>
+            <section class="filters">
+              <label>Filters</label>
+              <section class="filter-rows">
 
-          <section class="sliders">
-            <div>
-              <text>Delay</text>
-              <output name="delayOutput" id="delayOutput">30</output>
-              <input type="range" name="delayInput" id="delayInput" value="30" class="slider" oninput="delayOutput.value = delayInput.value">
-            </div>
-            <div>
-              <text>Feedback</text>
-              <output name="feedbackOutput" id="feedbackOutput">80</output>
-              <input type="range" name="feedbackInput" id="feedbackInput" value="80" class="slider" oninput="feedbackOutput.value = feedbackInput.value">
-            </div>
+                <section class="filter-row">
+                  <div class="toggle-div">
+                    <text>Reverb</text>
+                    <label class="switch" id="reverbInput">
+                      <input type="checkbox">
+                      <div class="toggle"></div>
+                    </label>
+                  </div>
+                  <div class="slider-div">
+                    <text>Delay</text>
+                    <output name="delayOutput" id="delayOutput">30</output>
+                    <br>
+                    <input type="range" name="delayInput" id="delayInput" value="30" class="slider" oninput="delayOutput.value = delayInput.value">
+                  </div>
+                </section>
+
+                <section class="filter-row">
+                  <div>
+                    <text class="toggle-div">Distortion</text>
+                    <label class="switch" id="distortionInput">
+                      <input type="checkbox">
+                      <div class="toggle"></div>
+                    </label>
+                  </div>
+                  <div class="slider-div">
+                    <text>Feedback</text>
+                    <output name="feedbackOutput" id="feedbackOutput">80</output>
+                    <br>
+                    <input type="range" name="feedbackInput" id="feedbackInput" value="80" class="slider" oninput="feedbackOutput.value = feedbackInput.value">
+                  </div>
+                </section>
+              </section>
           </section>
 
         </section>
