@@ -14,6 +14,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
   analyser = theremin.createAnalyser();
   analyser.smoothingTimeConstant = 0.85;
 
+  //for visualization
+  let HEIGHT = canvasCtx.canvas.clientHeight;
+  let WIDTH = canvasCtx.canvas.clientWidth;
   let osc;
   let waveShape = "sine";
 
@@ -59,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
   processer.onaudioprocess = function() {
-    let gradient = canvasCtx.createLinearGradient(0, 0, 0, 400);
+    let gradient = canvasCtx.createLinearGradient(0, 0, 0, HEIGHT);
       gradient.addColorStop(1,'#52489C');
       gradient.addColorStop(0.7,'#3C3572');
       gradient.addColorStop(0.5,'#262147');
@@ -67,13 +70,26 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     let freqArray =  new Uint8Array(analyser.frequencyBinCount);
     analyser.getByteFrequencyData(freqArray);
-
-
-    canvasCtx.clearRect(0, 0, 1200, 650);
-    canvasCtx.fillStyle=gradient;
-    window.drawSpectrum(freqArray, canvasCtx);
+    canvasCtx.clearRect(0, 0, HEIGHT, WIDTH);
+    // canvasCtx.fillStyle=gradient;
+    canvasCtx.fillStyle = gradient;
+    window.drawSpectrum(freqArray);
   };
 
+  window.drawSpectrum = function(array) {
+     let barHeight;
+     let x = 0;
+     let barWidth = (WIDTH / bufferLength) * 2.5;
+     for(var i = 0; i < bufferLength; i++) {
+       debugger
+       barHeight = dataArray[i]/2;
+
+
+       canvasCtx.fillRect(x,0,barWidth,barHeight);
+
+       x += barWidth + 1;
+     }
+  };
 
 
 });

@@ -28,22 +28,22 @@ flex-flow: column;
 
 
 text {
-  font-size: 24px;
+  font-size: 16px;
   margin-top: -5px;
 }
 
 .banner {
-  width: 1200px;
+  width: 50%;
   display: flex;
   justify-content:center;
   margin: 50px auto 0 auto;
-  border-top: 10px solid black;
-  border-left: 10px solid black;
-  border-right: 10px solid black;
+  border-top: 5px solid black;
+  border-left: 5px solid black;
+  border-right: 5px solid black;
 }
 
 .banner > * {
-  font-size: 36px;
+  font-size: 20px;
   padding: 2% 5%;
 }
 
@@ -53,25 +53,26 @@ text {
 }
 
 .bottom {
-  width: 1220px;
+  width: 50%;
+  height: 10%;
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
-  border-bottom: 10px solid black;
+  border-bottom: 5px solid black;
   background: #ff5c5c;
 }
 
 .waves {
-  height: 190px;
-  width: 320px;
+  width: 30%;
+  height: auto;
   display: flex;
   flex-direction: column;
-  border-right: 10px solid black;
-  border-left: 10px solid black;
+  border-right: 5px solid black;
+  border-left: 5px solid black;
 }
 
 .waves > * {
-  font-size: 24px;
+  font-size: 16px;
   /*border: 1px solid #88dade;*/
   padding: 5px;
   text-align: center;
@@ -98,9 +99,9 @@ text {
 }
 
 .sliders {
-  border-right: 10px solid black;
+  border-right: 5px solid black;
   padding-right: 40px;
-  width: 600px;
+  width: 40%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -110,24 +111,22 @@ text {
 .sliders > div {
   margin: 1.2% 0 1px 6px;
   display: inline-flex;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 
 .sliders > div:first-of-type > text, output {
     margin-top: 23px;
 }
 
-.sliders > div > * {
-
-  margin-right: 10px;
-}
 
 
 #canvas {
-  border: 10px solid black;
+  border: 5px solid black;
   margin: 0 auto;
   display: block;
   background: #ff5c5c;
+  width: 50%;
+  height: auto;
 }
 
 .fa, h1 {
@@ -142,11 +141,11 @@ text {
 #instructions {
   position: fixed;
   display: block;
-  width: 50%;
+  width: 40%;
   height: auto;
   z-index: 5;
-  margin: 9% 25%;
-  border: 10px solid black;
+  margin: 8% 30%;
+  border: 5px solid black;
   border-radius: 5%;
 }
 

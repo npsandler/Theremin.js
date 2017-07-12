@@ -1,9 +1,4 @@
-window.drawSpectrum = function(array, canvasCtx) {
-  for ( let i = 0; i < (array.length); i++ ){
-   let barHeight = array[i] * -2.6;
-   canvasCtx.fillRect(i*20, 650, 18, barHeight+25);
- }
-}
+
 
 // distortion algorithm --
 window.makeDistortionCurve = function(amount) {
