@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   window.drawSpectrum = function(array) {
      let barHeight;
      let x = 0;
-     let barWidth = (WIDTH / bufferLength) * 10;
+     let barWidth = (WIDTH / bufferLength) * 5;
      debugger
      for(var i = 0; i < bufferLength; i++) {
        barHeight = array[i] * -2 * volume;
