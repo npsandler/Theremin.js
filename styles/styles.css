@@ -33,7 +33,7 @@ text {
 }
 
 .banner {
-  width: 50%;
+  width: 40%;
   display: flex;
   justify-content:center;
   margin: 50px auto 0 auto;
@@ -49,6 +49,7 @@ text {
 
 .links {
   padding: 2% 0;
+  font-size: 20px;
 }
 
 #logo {
@@ -57,7 +58,7 @@ text {
 }
 
 .bottom {
-  width: 50%;
+  width: 40%;
   height: 10%;
   display: flex;
   justify-content: space-between;
