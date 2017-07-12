@@ -87,6 +87,10 @@ text {
   cursor: pointer;
 }
 
+.waves > input:first-of-type {
+  background: #52489C;
+}
+
 
 .switches {
   color: white;

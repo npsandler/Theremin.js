@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
   // visualization
-  analyser.fftSize = 4096;
+  analyser.fftSize = 2048;
   analyser.smoothingTimeConstant = 0;
 
   let bufferLength = analyser.frequencyBinCount;
@@ -64,9 +64,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
   processer.onaudioprocess = function() {
     let gradient = canvasCtx.createLinearGradient(0, 0, 0, HEIGHT);
       gradient.addColorStop(1,'#52489C');
-      gradient.addColorStop(0.7,'#3C3572');
-      gradient.addColorStop(0.5,'#262147');
-      gradient.addColorStop(0.1,'#17142B');
+      // gradient.addColorStop(0.7,'#3C3572');
+      // gradient.addColorStop(0.5,'#262147');
+      // gradient.addColorStop(0.1,'#17142B');
 
     let freqArray =  new Uint8Array(analyser.frequencyBinCount);
     analyser.getByteFrequencyData(freqArray);
@@ -79,13 +79,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
   window.drawSpectrum = function(array) {
      let barHeight;
      let x = 0;
-     let barWidth = (WIDTH / bufferLength) * 2.5;
+     let barWidth = (WIDTH / bufferLength) * 10;
+     debugger
      for(var i = 0; i < bufferLength; i++) {
-       debugger
-       barHeight = dataArray[i]/2;
+       barHeight = array[i] * -2 * volume;
 
 
-       canvasCtx.fillRect(x,0,barWidth,barHeight);
+       canvasCtx.fillRect(x,HEIGHT/3,barWidth,barHeight/3);
 
        x += barWidth + 1;
      }
