@@ -27,8 +27,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   for (i=0; i < waveShapes.length; i++){
     waveShapes[i].addEventListener('click',function(){
+      revertColors();
       waveShape = this.id;
+      this.style.background = "#52489C"
     });
+  }
+
+  function revertColors() {
+    for (i=0; i < waveShapes.length; i++){
+      waveShapes[i].style.background = "#ff5c5c";
+    }
   }
 
   // effect sliders
