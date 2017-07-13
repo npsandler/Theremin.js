@@ -155,7 +155,7 @@ text {
 
 #instructions {
   position: fixed;
-  display: block;
+  display: none;
   width: 40%;
   height: auto;
   z-index: 5;
