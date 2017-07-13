@@ -1,12 +1,12 @@
 
 
-let canvas, theremin, gain, delay, reverb, distortion, analyser, delayFeedback, filter;
+let canvas, canvasCtx, theremin, gain, delay, reverb, distortion, analyser, delayFeedback, filter;
 
 document.addEventListener("DOMContentLoaded", function(event) {
 
 
   canvas = document.getElementById('canvas');
-  let canvasCtx = canvas.getContext('2d');
+  canvasCtx = canvas.getContext('2d');
 
 
   //create AudioContext elements
