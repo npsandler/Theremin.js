@@ -57,6 +57,8 @@ text {
   height: 5%;
 }
 
+
+
 .bottom {
   width: 40%;
   height: 10%;
@@ -97,32 +99,6 @@ text {
 }
 
 
-/*.switches {
-  color: white;
-  font-size: 24px;
-  padding: 5px;
-}
-
-
-.sliders {
-  border-right: 5px solid black;
-  padding-right: 40px;
-  width: 40%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background: #ff5c5c;
-}
-
-.sliders > div {
-  margin: 1.2% 0 1px 6px;
-  display: inline-flex;
-  justify-content: space-between;
-}
-
-.sliders > div:first-of-type > text, output {
-    margin-top: 23px;
-}*/
 .filters {
   width: 100%;
   display: flex;
@@ -130,10 +106,21 @@ text {
   border-right: 5px solid black;
 }
 
-.filters > label {
+.filter-labels {
+  display: flex;
+  justify-content: space-between;
   color: black;
   padding: 1%;
 }
+
+#reset {
+  color: black;
+}
+
+#reset:hover {
+  cursor: pointer;
+}
+
 
 .filter-row {
   display: flex;
@@ -174,8 +161,8 @@ text {
 }
 
 #open {
+  font-size: 20px;
   color: #88dade;
-  font-family: sans-serif;
 }
 
 #open:hover {
