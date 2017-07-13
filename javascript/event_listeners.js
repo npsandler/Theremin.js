@@ -108,12 +108,18 @@ function drag(e){
 
 
 function handleSound(e) {
-  console.log("this worked");
   let width = window.canvas.offsetWidth;
   let height = window.canvas.offsetHeight;
 
   volume = 0.8 - (((e.clientY)/height*100)/100);
   freq = 500-1000*(1-((e.clientX)/width))+ 5;
+
+  console.log("clienty = " + e.clientY);
+  console.log("full height = " + window.canvas.offsetHeight)
+  console.log("clientx = " + e.clientX);
+  console.log("full width = " + window.canvas.offsetWidth)
+  debugger
+
 
   osc.frequency.value = freq;
   gain.gain.value = volume;
