@@ -81,7 +81,7 @@ text {
 .waves > * {
   font-size: 16px;
   /*border: 1px solid #88dade;*/
-  padding: 5px;
+  padding: 7%;
   text-align: center;
 }
 
@@ -125,7 +125,11 @@ text {
 .filter-row {
   display: flex;
   justify-content: space-between;
-    padding: 0 20%;
+    padding: 3% 20%;
+}
+
+.slider-div {
+  margin-top: -3%;
 }
 
 
