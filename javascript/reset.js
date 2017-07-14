@@ -1,7 +1,12 @@
 document.addEventListener("DOMContentLoaded", function(e) {
-  var resetButton = document.getElementById('reset');
+  var resetAllButton = document.getElementById('reset-all');
+  var resetSoundButton = document.getElementById('reset-sound');
 
-  resetButton.onclick = function() {
+  resetAllButton.onclick = function() {
     location.reload();
+  };
+
+  resetSoundButton.onclick = function() {
+    release(e)
   };
 });
