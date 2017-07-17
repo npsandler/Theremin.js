@@ -67,8 +67,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
     if (reverb.buffer) {
       reverb.buffer = undefined;
     } else {
-      reverb.buffer = theremin.createBuffer(2, 44100, theremin.sampleRate);
-      }
+      let request = new XMLHttpRequest();
+      request.open("GET", "impulse-response.mp3", true);
+      request.responseType = "arraybuffer";
+      console.log(request);
+      request.onload = function () {
+         context.decodeAudioData(request.response, function(buffer) {
+            reverb.buffer = convolverBuffer;
+         });
+       };
+    }
+    // console.log(reverb);
   });
 
 
@@ -113,8 +122,7 @@ function handleSound(e) {
 
   volume = 0.8 - (((e.clientY)/height*100)/100);
   freq = 500-1000*(1-((e.clientX)/width))+ 5;
-  // 
-  // console.log("clienty = " + e.clientY);
+  //
   // console.log("full height = " + canvasCtx.canvas.clientHeight)
   // console.log("offset height = " + window.canvas.offsetHeight)
   //
@@ -123,8 +131,11 @@ function handleSound(e) {
   osc.frequency.value = freq;
   gain.gain.value = volume;
 
+  reverb.normalize = false;
+
   osc.connect(theremin.destination);
   delay.connect(theremin.destination);
+  reverb.connect(theremin.destination);
 
   delay.delayTime.value = delayVal;
   delay.connect(theremin.destination);
