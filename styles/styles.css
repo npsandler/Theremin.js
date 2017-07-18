@@ -16,7 +16,7 @@ button, article, footer, small {
 }
 
 body {
-font-family: 'Bungee Inline', cursive;
+font-family: 'Inconsolata', monospace;
 font-size: 16px;
 line-height: 1.1666666666;
 background: #52489C;
@@ -178,14 +178,13 @@ text {
   color: #88dade;
   background: inherit;
   margin: 1%;
-  padding: 0;
   border: 1px solid #88dade;
 }
 
 #open:hover {
   cursor: pointer;
-  color: #52489C;
-  border: 1px solid #52489C;
+  color: white;
+  border: 1px solid white;
 }
 
 
