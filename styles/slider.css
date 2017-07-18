@@ -27,7 +27,6 @@ input[type=range]::-webkit-slider-thumb {
   border-radius: 20%;
   background: white;
   cursor: pointer;
-  border: 2px solid black;
 }
 
 input[type=range]::-ms-thumb {
@@ -36,7 +35,6 @@ input[type=range]::-ms-thumb {
   border-radius: 20%;
   background: white;
   cursor: pointer;
-  border: 2px solid black;
 }
 
 input[type=range]::-webkit-slider-runnable-track {
