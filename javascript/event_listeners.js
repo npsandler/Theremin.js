@@ -65,19 +65,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   reverbToggle.addEventListener("change", function() {
     if (reverb.buffer) {
-      reverb.buffer = undefined;
+      sourceNode.buffer = undefined;
     } else {
       let request = new XMLHttpRequest();
-      request.open("GET", "impulse-response.mp3", true);
+      request.open("GET", "https://mdn.github.io/voice-change-o-matic/audio/concert-crowd.ogg", true);
       request.responseType = "arraybuffer";
       console.log(request);
-      request.onload = function () {
+      request.onreadyStateChange = function () {
          context.decodeAudioData(request.response, function(buffer) {
-            reverb.buffer = convolverBuffer;
-         });
+            sourceNode.buffer = buffer;
+         }, function(e){console.log("Error with decoding audio data" + e.err)});
        };
     }
-    // console.log(reverb);
+    console.log(reverb);
+    console.log(sourceNode);
   });
 
 
@@ -86,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 // default values
 let active = false;
-let volume = 0;
+volume = 0;
 let freq = 0;
 
 // methods mouse events

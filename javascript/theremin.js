@@ -1,6 +1,6 @@
 
 
-let canvas, canvasCtx, theremin, gain, delay, reverb, distortion, analyser, delayFeedback, filter;
+let canvas, canvasCtx, theremin, gain, delay, reverb, distortion, analyser, delayFeedback, filter, sourceNode, volume;
 
 document.addEventListener("DOMContentLoaded", function(event) {
 
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   let processer = theremin.createScriptProcessor(2048, 1, 1);
   processer.connect(theremin.destination);
 
-  let sourceNode = theremin.createBufferSource();
+  sourceNode = theremin.createBufferSource();
   sourceNode.connect(analyser);
   analyser.connect(processer);
 
