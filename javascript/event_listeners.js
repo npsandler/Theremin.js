@@ -123,11 +123,6 @@ function handleSound(e) {
 
   volume = 0.8 - (((e.clientY)/height*100)/100);
   freq = 500-1000*(1-((e.clientX)/width))+ 5;
-  //
-  // console.log("full height = " + canvasCtx.canvas.clientHeight)
-  // console.log("offset height = " + window.canvas.offsetHeight)
-  //
-  //
 
   osc.frequency.value = freq;
   gain.gain.value = volume;
@@ -140,8 +135,6 @@ function handleSound(e) {
 
   delay.delayTime.value = delayVal;
   delay.connect(theremin.destination);
-
-
 
   delayFeedback.gain.value = feedbackVal;
   filter.frequency.value = 500;

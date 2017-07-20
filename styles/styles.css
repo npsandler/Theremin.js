@@ -20,7 +20,7 @@ font-family: 'Inconsolata', monospace;
 font-size: 16px;
 line-height: 1.1666666666;
 background: #52489C;
-
+margin: 5% auto 0 auto;
 color: white;
 display: flex;
 flex-flow: column;
@@ -45,6 +45,7 @@ text {
 .banner > * {
   font-size: 28px;
   padding: 1%;
+  margin
 }
 
 .links {
@@ -160,7 +161,7 @@ text {
 #instructions {
   position: fixed;
   display: none;
-  width: 57%;
+  width: 60%;
   height: auto;
   z-index: 5;
   margin: 0% 21%;
