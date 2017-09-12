@@ -65,14 +65,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
     let gradient = canvasCtx.createLinearGradient(0, 0, 0, HEIGHT);
       gradient.addColorStop(1,'#52489C');
 
-      // gradient.addColorStop(0.7,'#3C3572');
-      // gradient.addColorStop(0.5,'#262147');
-      // gradient.addColorStop(0.1,'#17142B');
-
     let freqArray =  new Uint8Array(analyser.frequencyBinCount);
     analyser.getByteFrequencyData(freqArray);
     canvasCtx.clearRect(0, 0, HEIGHT, WIDTH);
-    // canvasCtx.fillStyle=gradient;
     canvasCtx.fillStyle = gradient;
     window.drawSpectrum(freqArray);
   };
