@@ -1,7 +1,7 @@
 
 document.addEventListener("DOMContentLoaded", function(event) {
-    var instructions = document.getElementById('instructions');
-    var open = document.getElementById("open");
+    let instructions = document.getElementById('instructions');
+    let open = document.getElementById("open");
 
     open.onclick = function() {
         instructions.style.display = "block";
