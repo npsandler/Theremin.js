@@ -1,4 +1,4 @@
-# [Theremin.js](www.npsandler.com/Theremin.js)
+# [Theremin.js](http://npsandler.com/Theremin.js/)
 
 Theremin.js a music creation and visualization app built entirely using JavaScript, HTML, and CSS.
 
