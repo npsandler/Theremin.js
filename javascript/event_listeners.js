@@ -22,6 +22,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     release(e);
   });
 
+  window.canvas.addEventListener('mouseleave', (e) => {
+    release(e);
+  })
+
   //sound wave buttons
   let waveShapes = document.getElementsByClassName('oscType');
 
