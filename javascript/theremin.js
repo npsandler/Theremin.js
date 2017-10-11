@@ -77,11 +77,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
      let x = 0;
      let barWidth = (WIDTH / bufferLength) * 5;
      for(var i = 0; i < bufferLength; i++) {
-       barHeight = ((array[i]-10) * -3 * (volume)) - 50;
-       if (barHeight > -50 ) {
-         barHeight = -50;
-       }
-       canvasCtx.fillRect(x,HEIGHT/2,barWidth,barHeight/3 - 80);
+       barHeight = (array[i]-10) * -3 * (volume);
+      //  if (barHeight > -50 ) {
+      //    barHeight = -50;
+      //  }
+       canvasCtx.fillRect(x,HEIGHT/2,barWidth,barHeight/2);
 
        x += barWidth + 1;
      }
