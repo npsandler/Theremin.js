@@ -1,6 +1,6 @@
 
 // setting up variables
-let delaySlider, feedbackSlider, distortionToggle, reverbToggle;
+let delaySlider, feedbackSlider, distortionToggle, reverbToggle, osc;
 
 let waveShape = "sine";
 let delayVal = 0.3;
@@ -158,4 +158,14 @@ function resetFilters(e){
   waveShape = "sine";
   delayVal = 0.3;
   feedbackVal = 0.4;
+  let delayOutput = document.getElementById('delayOutput');
+  let feedbackOutput = document.getElementById('feedbackOutput');
+
+  delayFeedback.gain.value = feedbackVal;
+  delay.delayTime.value = delayVal;
+  delayOutput.value = "30"
+  feedbackOutput.value = "40"
+
+  delaySlider.value = 30;
+  feedbackSlider.value = 40;
 }
