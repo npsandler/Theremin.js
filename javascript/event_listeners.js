@@ -164,8 +164,8 @@ function resetFilters(e){
   delayFeedback.gain.value = feedbackVal;
   delay.delayTime.value = delayVal;
   delayOutput.value = "30"
-  feedbackOutput.value = "40"
+  feedbackOutput.value = "80"
 
   delaySlider.value = 30;
-  feedbackSlider.value = 40;
+  feedbackSlider.value = 80;
 }
