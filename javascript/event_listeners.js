@@ -153,3 +153,9 @@ function release(e){
   gain.gain.value = 0;
   osc.stop();
 }
+
+function resetFilters(e){
+  waveShape = "sine";
+  delayVal = 0.3;
+  feedbackVal = 0.4;
+}
