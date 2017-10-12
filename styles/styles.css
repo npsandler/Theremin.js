@@ -61,7 +61,7 @@ text {
 
 
 .bottom {
-  width: 40%;
+  width: 600px;
   height: 10%;
   display: flex;
   justify-content: space-between;
@@ -145,7 +145,7 @@ text {
   margin: 0 auto;
   display: block;
   background: #ff5c5c;
-  width: 50%;
+  width: 800px;
   height: auto;
 }
 
