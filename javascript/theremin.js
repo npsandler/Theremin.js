@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   //for visualization
   let HEIGHT = canvasCtx.canvas.clientHeight;
   let WIDTH = canvasCtx.canvas.clientWidth;
+  debugger
   let osc;
   let waveShape = "sine";
 
@@ -81,9 +82,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
       //  if (barHeight > -50 ) {
       //    barHeight = -50;
       //  }
-       canvasCtx.fillRect(x,HEIGHT/2,barWidth,barHeight/2);
+       canvasCtx.fillRect(x,HEIGHT/3 + 20,barWidth,barHeight/2);
 
-       x += barWidth + 1;
+       x += barWidth;
      }
   };
 
